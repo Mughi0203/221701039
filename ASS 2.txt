@@ -1,0 +1,74 @@
+<<<<<<<<<<<<java>>>>>>>>>>>>>>>
+
+
+import java.util.Scanner;
+
+public class ScientificCalculator {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double result = 0;
+
+        System.out.println("---- Scientific Calculator ----");
+        System.out.println("Available operations: +, -, *, /, mod, sin, cos, tan, log, sqrt, pow");
+
+        System.out.print("Enter first number: ");
+        double num1 = sc.nextDouble();
+
+        System.out.print("Enter operation: ");
+        String op = sc.next();
+
+        double num2 = 0;
+        if (!op.equalsIgnoreCase("sin") && !op.equalsIgnoreCase("cos") &&
+            !op.equalsIgnoreCase("tan") && !op.equalsIgnoreCase("log") &&
+            !op.equalsIgnoreCase("sqrt")) {
+            System.out.print("Enter second number: ");
+            num2 = sc.nextDouble();
+        }
+
+        switch (op) {
+            case "+":
+                result = num1 + num2;
+                break;
+            case "-":
+                result = num1 - num2;
+                break;
+            case "*":
+                result = num1 * num2;
+                break;
+            case "/":
+                result = num2 != 0 ? num1 / num2 : Double.NaN;
+                break;
+            case "mod":
+                result = num1 % num2;
+                break;
+            case "pow":
+                result = Math.pow(num1, num2);
+                break;
+            case "sin":
+                result = Math.sin(Math.toRadians(num1));
+                break;
+            case "cos":
+                result = Math.cos(Math.toRadians(num1));
+                break;
+            case "tan":
+                result = Math.tan(Math.toRadians(num1));
+                break;
+            case "log":
+                result = Math.log(num1);
+                break;
+            case "sqrt":
+                result = Math.sqrt(num1);
+                break;
+            default:
+                System.out.println("Invalid operation.");
+                return;
+        }
+
+        System.out.println("Result = " + result);
+        sc.close();
+    }
+}
+
+
+
