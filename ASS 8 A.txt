@@ -1,0 +1,105 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/phoneNumber"
+        android:hint="Enter Phone Number"
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/message"
+        android:hint="Enter Message"
+        android:minLines="3"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/sendButton"
+        android:text="Send SMS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
+
+
+
+<<<<<<<java>>>>>>>>>>
+
+
+package com.example.sendsms;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText phoneNumber, message;
+    Button sendButton;
+    private static final int SMS_PERMISSION_CODE = 100;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        phoneNumber = findViewById(R.id.phoneNumber);
+        message = findViewById(R.id.message);
+        sendButton = findViewById(R.id.sendButton);
+
+        sendButton.setOnClickListener(view -> {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_CODE);
+            } else {
+                sendSMS();
+            }
+        });
+    }
+
+    private void sendSMS() {
+        String number = phoneNumber.getText().toString();
+        String msg = message.getText().toString();
+
+        if (number.isEmpty() || msg.isEmpty()) {
+            Toast.makeText(this, "Fill both fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number, null, msg, null, null);
+            Toast.makeText(this, "SMS Sent!", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "SMS Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        if (requestCode == SMS_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendSMS();
+            } else {
+                Toast.makeText(this, "SMS permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+}

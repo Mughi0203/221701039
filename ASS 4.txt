@@ -1,0 +1,106 @@
+MainActivity.java
+|-- StudentDetailsFragment.java
+|-- StudentMarksFragment.java
+|-- res/
+    |-- layout/
+        |-- activity_main.xml
+        |-- fragment_student_details.xml
+        |-- fragment_student_marks.xml
+
+
+<<<<<activity_main.xml>>>>>>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.studentapp.StudentDetailsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <fragment
+        android:id="@+id/marksFragment"
+        android:name="com.example.studentapp.StudentMarksFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+</LinearLayout>
+
+<<<<<StudentDetailsFragment.java>>>>>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText android:id="@+id/name"
+        android:hint="Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/age"
+        android:hint="Age"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/address"
+        android:hint="Address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+
+
+<<<<<<fragment_student_marks.xml>>>>>>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText android:id="@+id/marks"
+        android:hint="Marks"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/total"
+        android:hint="Total"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/grade"
+        android:hint="Grade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/status"
+        android:hint="Status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+
+<<<<<<<main>>>>>>>
+package com.example.studentapp;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
